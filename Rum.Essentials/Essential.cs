@@ -8,7 +8,7 @@ namespace Rum.Essentials;
 /// <summary>
 /// Application essentials.
 /// </summary>
-internal static class Essential
+public static class Essential
 {
 	/// <summary>
 	/// Lock for new build.
@@ -38,7 +38,7 @@ internal static class Essential
 	/// Application essentials bundle.
 	/// </summary>
 	/// <returns>Application essentials bundle</returns>
-	internal static (Settings Settings, ILogger Logger) Bundle(bool isRebuildRequired = false)
+	public static (Settings Settings, ILogger Logger) Bundle(bool isRebuildRequired = false)
 	{
 		if(isRebuildRequired || Essential._cache.IsEmpty())
 		{
@@ -64,7 +64,7 @@ internal static class Essential
 	/// </summary>
 	/// <typeparam name="TInstance">Type of the requested bundle entry</typeparam>
 	/// <returns>Bundle entry of the requested type</returns>
-	internal static TInstance OfType<TInstance>()
+	public static TInstance OfType<TInstance>()
 	where TInstance : class
 	{
 		if(Essential._cache.TryGetValue(typeof(TInstance), out var instance) is false)

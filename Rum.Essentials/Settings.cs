@@ -9,7 +9,7 @@ namespace Rum.Essentials;
 /// <summary>
 /// Wrapper for application settings.
 /// </summary>
-internal sealed class Settings
+public sealed class Settings
 {
 	/// <summary>
 	/// Application settings root.
@@ -29,7 +29,7 @@ internal sealed class Settings
 	/// </summary>
 	/// <returns>Application configuration root</returns>
 	/// <exception cref="ApplicationException">Thrown if application configuration root has not been configured</exception>
-	internal IConfigurationRoot Root()
+	public IConfigurationRoot Root()
 	{
 		if(this._root is null)
 		{
@@ -44,7 +44,7 @@ internal sealed class Settings
 	/// </summary>
 	/// <param name="key">Key of the application settings element</param>
 	/// <returns>Value of the application settings element</returns>
-	internal string? Value(Key key)
+	public string? Value(Key key)
 	{
 		return this._root[key];
 	}
@@ -55,7 +55,7 @@ internal sealed class Settings
 	/// <param name="key">Key of the application settings element</param>
 	/// <typeparam name="TValue">Type of the value of the application settings element</typeparam>
 	/// <returns>Value of the application settings element</returns>
-	internal TValue? Value<TValue>(Key key)
+	public TValue? Value<TValue>(Key key)
 	{
 		return (TValue?)TypeDescriptor.GetConverter(typeof(TValue))?.ConvertFrom(this._root[key] ?? string.Empty);
 	}
@@ -79,7 +79,7 @@ internal sealed class Settings
 	/// <summary>
 	/// Key of the application settings element.
 	/// </summary>
-	internal sealed class Key
+	public sealed class Key
 	{
 		/// <summary>
 		/// <see cref="string"/> representation of the key.
@@ -90,7 +90,7 @@ internal sealed class Settings
 		/// Constructor of the instance.
 		/// </summary>
 		/// <param name="value"><see cref="string"/> representation of the key</param>
-		internal Key(string value)
+		public Key(string value)
 		{
 			this._value = value;
 		}
