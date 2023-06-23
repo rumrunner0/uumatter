@@ -12,6 +12,12 @@
 		<Title>Essentials</Title>
 		<Authors>Roman Malyi</Authors>
 		<Copyright>Copyright (c) Roman Malyi 2023.</Copyright>
+		<RepositoryUrl>https://github.com/rumrunner0/essentials</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Company>rumrunner0</Company>
+		<AssemblyVersion>0.0.1</AssemblyVersion>
+		<FileVersion>1</FileVersion>
+		<NeutralLanguage>en-US</NeutralLanguage>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
