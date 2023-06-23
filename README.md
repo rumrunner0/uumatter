@@ -1,3 +1,3 @@
 # Essentials
-> Nothing here for now. <br />
+> Nothing here for now.
 > TODO: write description.
