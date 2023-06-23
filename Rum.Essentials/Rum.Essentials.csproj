@@ -11,9 +11,9 @@
 
 	<PropertyGroup>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>0.0.1</Version>
-		<AssemblyVersion>0.0.1</AssemblyVersion>
-		<FileVersion>1</FileVersion>
+		<Version>0.0.2</Version>
+		<AssemblyVersion>0.0.2</AssemblyVersion>
+		<FileVersion>2</FileVersion>
 		<Title>Essentials</Title>
 		<Authors>Roman Malyi</Authors>
 		<Copyright>Copyright (c) Roman Malyi 2023.</Copyright>
