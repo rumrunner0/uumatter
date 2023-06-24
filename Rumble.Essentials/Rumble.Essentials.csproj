@@ -12,9 +12,9 @@
 	<PropertyGroup>
 		<PackageId>Rumble.Essentials</PackageId>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>0.0.16</Version>
-		<AssemblyVersion>0.0.16</AssemblyVersion>
-		<FileVersion>16</FileVersion>
+		<Version>0.0.17</Version>
+		<AssemblyVersion>0.0.17</AssemblyVersion>
+		<FileVersion>17</FileVersion>
 		<Title>Essentials</Title>
 		<Authors>Roman Malyi</Authors>
 		<Copyright>Copyright (c) Roman Malyi 2023.</Copyright>

@@ -45,7 +45,7 @@ public sealed class Settings
 	/// <summary>
 	/// Instance of the class.
 	/// </summary>
-	public static Settings Instance()
+	internal static Settings Instance()
 	{
 		return Settings._instance.Value;
 	}
