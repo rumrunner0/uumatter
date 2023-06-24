@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using Serilog;
 
 namespace Rumble.Essentials;
@@ -11,105 +12,79 @@ namespace Rumble.Essentials;
 public static class Essential
 {
 	/// <summary>
-	/// Lock for new build.
-	/// </summary>
-	private static readonly object _newBuildLock;
-
-	/// <summary>
 	/// Cached essentials.
 	/// </summary>
 	private static readonly IDictionary<Type, object> _cache;
+
+	/// <summary>
+	///
+	/// </summary>
+	private static readonly IDictionary<Type, Func<object>> _resolver;
 
 	/// <summary>
 	/// Constructor of the class.
 	/// </summary>
 	static Essential()
 	{
-		Essential._newBuildLock = new ();
 		Essential._cache = new ConcurrentDictionary<Type, object>();
-
-		foreach(var (type, instance) in Essential.NewBuild())
+		Essential._resolver = new ConcurrentDictionary<Type, Func<object>>()
 		{
-			Essential._cache.Add(type, instance);
-		}
-	}
-
-	/// <summary>
-	/// Application essentials bundle.
-	/// </summary>
-	/// <returns>Application essentials bundle</returns>
-	public static (Settings Settings, ILogger Logger) Bundle(bool isRebuildRequired = false)
-	{
-		if(isRebuildRequired || Essential._cache.IsEmpty())
-		{
-			lock(Essential._newBuildLock)
+			[typeof(Settings)] = Settings.Instance,
+			[typeof(ILogger)] = () =>
 			{
-				Essential._cache.Clear();
-				foreach(var (type, instance) in Essential.NewBuild())
+				var settings = Settings.Instance();
+				const string LOGGER_SETTINGS_SECTION_NAME = "Serilog";
+				if(settings.Root().GetSection(key: LOGGER_SETTINGS_SECTION_NAME).DoesNotExist())
 				{
-					Essential._cache.Add(type, instance);
+					throw new ApplicationException
+					(
+						$"Application essentials can't be configured. " +
+						$"Settings for logger don't exist in application settings. " +
+						$"Please, ensure \"{LOGGER_SETTINGS_SECTION_NAME}\" section " +
+						$"exists in application settings with proper configuration parameters."
+					);
 				}
+
+				return new LoggerConfiguration().ReadFrom.Configuration
+				(
+					configuration: settings.Root(),
+					readerOptions: new () { SectionName = LOGGER_SETTINGS_SECTION_NAME }
+				).CreateLogger();
 			}
-		}
-
-		return
-		(
-			(Settings)Essential._cache[typeof(Settings)],
-			(ILogger)Essential._cache[typeof(ILogger)]
-		);
-	}
-
-	/// <summary>
-	/// Bundle entry of requested type.
-	/// </summary>
-	/// <typeparam name="TInstance">Type of the requested bundle entry</typeparam>
-	/// <returns>Bundle entry of the requested type</returns>
-	public static TInstance OfType<TInstance>()
-	where TInstance : class
-	{
-		if(Essential._cache.TryGetValue(typeof(TInstance), out var instance) is false)
-		{
-			throw new ApplicationException
-			(
-				$"Instance of type {typeof(TInstance)} can't be obtained." +
-				$"No such type is registered in the application bundle."
-			);
-		}
-
-		return (TInstance)instance;
-	}
-
-	/// <summary>
-	/// New build of application essentials.
-	/// </summary>
-	/// <returns>New build of application essentials</returns>
-	/// <exception cref="ApplicationException">Thrown if the build can't be created for any reason</exception>
-	private static IDictionary<Type, object> NewBuild()
-	{
-		var settings = new Settings();
-
-		const string LOGGER_SETTINGS_SECTION_NAME = "Serilog";
-		if(settings.Root().GetSection(key: LOGGER_SETTINGS_SECTION_NAME).DoesNotExist())
-		{
-			throw new ApplicationException
-			(
-				$"Application essentials can't be configured. " +
-				$"Settings for logger don't exist in application settings. " +
-				$"Please, ensure \"{LOGGER_SETTINGS_SECTION_NAME}\" section " +
-				$"exists in application settings with proper configuration parameters."
-			);
-		}
-
-		var logger = new LoggerConfiguration().ReadFrom.Configuration
-		(
-			configuration: settings.Root(),
-			readerOptions: new () { SectionName = LOGGER_SETTINGS_SECTION_NAME }
-		).CreateLogger();
-
-		return new Dictionary<Type, object>()
-		{
-			[typeof(Settings)] = settings,
-			[typeof(ILogger)] = logger
 		};
+	}
+
+	/// <summary>
+	/// Application essentials entry.
+	/// </summary>
+	/// <typeparam name="T">Type of the application essentials entry</typeparam>
+	public static T OfType<T>()
+	{
+		return (T)Essential.OfType(typeof(T));
+	}
+
+	/// <summary>
+	/// Application essentials entry.
+	/// </summary>
+	/// <param name="type">Type of the application essentials entry</param>
+	public static object OfType(Type type)
+	{
+		if(Essential._cache.TryGetValue(type, out var instance))
+		{
+			return instance;
+		}
+
+		if(Essential._resolver.TryGetValue(type, out var resolver))
+		{
+			var value = resolver.Invoke();
+			Essential._cache.Add(key: type, value);
+			return value;
+		}
+
+		throw new ApplicationException
+		(
+			$"Instance of type {nameof(type)} can't be obtained." +
+			$"No such type is registered in the application essentials bundle."
+		);
 	}
 }

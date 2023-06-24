@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
@@ -17,11 +18,36 @@ public sealed class Settings
 	private readonly IConfigurationRoot _root;
 
 	/// <summary>
+	/// Cached instance of the class.
+	/// </summary>
+	private static readonly Lazy<Settings> _instance;
+
+	/// <summary>
 	/// Constructor of the class.
 	/// </summary>
-	internal Settings()
+	static Settings()
 	{
-		this._root = FetchRoot();
+		Settings._instance = new
+		(
+			valueFactory: () => new (),
+			mode: LazyThreadSafetyMode.ExecutionAndPublication
+		);
+	}
+
+	/// <summary>
+	/// Constructor of the instance.
+	/// </summary>
+	private Settings()
+	{
+		this._root = Settings.FetchRoot();
+	}
+
+	/// <summary>
+	/// Instance of the class.
+	/// </summary>
+	public static Settings Instance()
+	{
+		return Settings._instance.Value;
 	}
 
 	/// <summary>
@@ -66,7 +92,9 @@ public sealed class Settings
 	/// <returns>Fetched application configuration root</returns>
 	private static IConfigurationRoot FetchRoot()
 	{
-		var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? Environments.Production;
+		var environment = Environment
+			.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
+			?? Environments.Production;
 
 		return new ConfigurationBuilder()
 			.SetBasePath(basePath: Directory.GetCurrentDirectory())
