@@ -19,7 +19,6 @@
 		<Copyright>Copyright (c) Roman Malyi 2023.</Copyright>
 		<RepositoryUrl>https://github.com/rumrunner0/essentials</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<Company>rumrunner0</Company>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
