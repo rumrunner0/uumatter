@@ -1,2 +1,2 @@
 # Essentials
-![Nuget](https://img.shields.io/nuget/v/Rum.Essentials) ![Nuget](https://img.shields.io/nuget/dt/Rum.Essentials)
+![Nuget](https://img.shields.io/nuget/v/Rumble.Essentials) ![Nuget](https://img.shields.io/nuget/dt/Rumble.Essentials)
