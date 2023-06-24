@@ -7,14 +7,15 @@
 		<Nullable>enable</Nullable>
 		<OutputType>Library</OutputType>
 		<IsPackable>true</IsPackable>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<PackageId>Rumble.Essentials</PackageId>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>0.0.5</Version>
-		<AssemblyVersion>0.0.5</AssemblyVersion>
-		<FileVersion>5</FileVersion>
+		<Version>0.0.9</Version>
+		<AssemblyVersion>0.0.9</AssemblyVersion>
+		<FileVersion>9</FileVersion>
 		<Title>Essentials</Title>
 		<Authors>Roman Malyi</Authors>
 		<Copyright>Copyright (c) Roman Malyi 2023.</Copyright>
@@ -30,13 +31,15 @@
 		<DebugType>portable</DebugType>
 		<Optimize>false</Optimize>
 		<DefineConstants>TRACE</DefineConstants>
+		<DocumentationFile>bin\Debug\Rumble.Essentials.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<DebugSymbols>false</DebugSymbols>
-		<DebugType>none</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>portable</DebugType>
 		<Optimize>true</Optimize>
 		<DefineConstants />
+		<DocumentationFile>bin\Release\Rumble.Essentials.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup>

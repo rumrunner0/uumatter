@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 
-namespace Rum.Essentials;
+namespace Rumble.Essentials;
 
 /// <summary>
 /// Extensions for types used in application essentials.

@@ -4,7 +4,7 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace Rum.Essentials;
+namespace Rumble.Essentials;
 
 /// <summary>
 /// Wrapper for application settings.

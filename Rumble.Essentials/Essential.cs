@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Serilog;
 
-namespace Rum.Essentials;
+namespace Rumble.Essentials;
 
 /// <summary>
 /// Application essentials.
