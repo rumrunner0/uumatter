@@ -1,0 +1,26 @@
+{
+	"$schema": "https://json.schemastore.org/launchsettings.json",
+	"profiles":
+	{
+		"Development":
+		{
+			"commandName": "Project",
+			"commandLineArgs": "",
+			"dotnetRunMessages": true,
+			"environmentVariables":
+			{
+				"DOTNET_ENVIRONMENT": "Development"
+			}
+		},
+		"Production":
+		{
+			"commandName": "Project",
+			"commandLineArgs": "",
+			"dotnetRunMessages": false,
+			"environmentVariables":
+			{
+				"DOTNET_ENVIRONMENT": "Production"
+			}
+		}
+	}
+}
