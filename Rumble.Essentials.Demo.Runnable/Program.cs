@@ -7,16 +7,13 @@ Console.InputEncoding = Encoding.UTF8;
 Console.OutputEncoding = Encoding.UTF8;
 
 var settings = Essential.OfType<Settings>();
-var logger = Essential.OfType<ILogger>();
-Log.Logger = logger;
+Log.Logger = Essential.OfType<ILogger>();
 
-logger.ForContext<Program>();
+var logger = Log.Logger.ForContext<Program>();
 logger.Information("Application has been started");
 
 // ...
 
 logger.Information("Application has been shut down");
 logger.Information("");
-
 Log.CloseAndFlush();
-Environment.Exit(EnvironmentExitCode.Success);
