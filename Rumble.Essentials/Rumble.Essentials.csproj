@@ -33,7 +33,6 @@
 		<DebugType>portable</DebugType>
 		<Optimize>false</Optimize>
 		<DefineConstants>TRACE</DefineConstants>
-		<DocumentationFile>bin\Debug\Rumble.Essentials.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -41,7 +40,6 @@
 		<DebugType>none</DebugType>
 		<Optimize>true</Optimize>
 		<DefineConstants />
-		<DocumentationFile>bin\Release\Rumble.Essentials.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup>
