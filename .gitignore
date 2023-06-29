@@ -1,7 +1,9 @@
-**/.idea/*
 **/.vs/*
+**/.vscode/*
+**/.idea/*
 
 **/bin/*
 **/obj/*
 
 *.log
+*.user
