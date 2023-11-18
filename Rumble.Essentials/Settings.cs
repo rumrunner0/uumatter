@@ -8,88 +8,56 @@ using Microsoft.Extensions.Hosting;
 namespace Rumble.Essentials;
 
 /// <summary>
-/// Wrapper for application settings.
+/// Wrapper of the application settings.
 /// </summary>
 public sealed class Settings
 {
-	/// <summary>
-	/// Application settings root.
-	/// </summary>
+	///
+	/// <inheritdoc cref="IConfigurationRoot" />
+	///
 	private readonly IConfigurationRoot _root;
 
 	/// <summary>
-	/// Cached instance of the class.
+	/// <see cref="Lazy{T}" /> singleton instance.
 	/// </summary>
-	private static readonly Lazy<Settings> _instance;
+	public static Lazy<Settings> Instance { get; private set; }
 
-	/// <summary>
-	/// Constructor of the class.
-	/// </summary>
-	static Settings()
-	{
-		Settings._instance = new
-		(
-			valueFactory: () => new (),
-			mode: LazyThreadSafetyMode.ExecutionAndPublication
-		);
-	}
+	///
+	/// <inheritdoc cref="Settings" />
+	///
+	static Settings() => Settings.Instance = new (() => new (), LazyThreadSafetyMode.ExecutionAndPublication);
 
-	/// <summary>
-	/// Constructor of the instance.
-	/// </summary>
-	private Settings()
-	{
-		this._root = Settings.FetchRoot();
-	}
-
-	/// <summary>
-	/// Instance of the class.
-	/// </summary>
-	internal static Settings Instance()
-	{
-		return Settings._instance.Value;
-	}
+	///
+	/// <inheritdoc cref="Settings" />
+	///
+	private Settings() => this._root = Settings.FetchRoot();
 
 	/// <summary>
 	/// Application configuration root.
 	/// </summary>
 	/// <returns>Application configuration root</returns>
 	/// <exception cref="ApplicationException">Thrown if application configuration root has not been configured</exception>
-	public IConfigurationRoot Root()
-	{
-		if(this._root is null)
-		{
-			throw new NullReferenceException(message: "Application configuration root has not been configured.");
-		}
-
-		return this._root;
-	}
+	public IConfigurationRoot Root() => this._root;
 
 	/// <summary>
-	/// Value of the application settings element by its <paramref name="key"/>.
+	/// Value of the application settings item by its <paramref name="key"/>.
 	/// </summary>
-	/// <param name="key">Key of the application settings element</param>
-	/// <returns>Value of the application settings element</returns>
-	public string? Value(Key key)
-	{
-		return this._root[key];
-	}
+	/// <param name="key">The key.</param>
+	/// <returns>Value.</returns>
+	public string? Value(Key key) => this._root[key];
 
 	/// <summary>
-	/// Value of the application settings element by its <paramref name="key"/>.
+	/// Value of the application settings item by its <paramref name="key"/>.
 	/// </summary>
-	/// <param name="key">Key of the application settings element</param>
-	/// <typeparam name="TValue">Type of the value of the application settings element</typeparam>
-	/// <returns>Value of the application settings element</returns>
-	public TValue? Value<TValue>(Key key)
-	{
-		return (TValue?)TypeDescriptor.GetConverter(typeof(TValue))?.ConvertFrom(this._root[key] ?? string.Empty);
-	}
+	/// <param name="key">The key.</param>
+	/// <typeparam name="TValue">Type of the value.</typeparam>
+	/// <returns>Value.</returns>
+	public TValue? Value<TValue>(Key key) => (TValue?)TypeDescriptor.GetConverter(typeof(TValue))?.ConvertFrom(this._root[key] ?? string.Empty);
 
 	/// <summary>
-	/// Fetches and saves application configuration root.
+	/// Fetches and saves an application configuration root.
 	/// </summary>
-	/// <returns>Fetched application configuration root</returns>
+	/// <returns>Application configuration root.</returns>
 	private static IConfigurationRoot FetchRoot()
 	{
 		var environment = Environment
@@ -97,7 +65,7 @@ public sealed class Settings
 			?? Environments.Production;
 
 		return new ConfigurationBuilder()
-			.SetBasePath(basePath: Directory.GetCurrentDirectory())
+			.SetBasePath(Directory.GetCurrentDirectory())
 			.AddJsonFile(path: $"appsettings.json", optional: false, reloadOnChange: true)
 			.AddJsonFile(path: $"appsettings.{environment}.json", optional: false, reloadOnChange: true)
 			.AddEnvironmentVariables()
@@ -105,7 +73,7 @@ public sealed class Settings
 	}
 
 	/// <summary>
-	/// Key of the application settings element.
+	/// Key of the application settings item.
 	/// </summary>
 	public sealed class Key
 	{
@@ -114,23 +82,17 @@ public sealed class Settings
 		/// </summary>
 		private readonly string _value;
 
-		/// <summary>
-		/// Constructor of the instance.
-		/// </summary>
-		/// <param name="value"><see cref="string"/> representation of the key</param>
-		public Key(string value)
-		{
-			this._value = value;
-		}
+		///
+		/// <inheritdoc cref="Key" />
+		///
+		/// <param name="value"><see cref="string"/> representation of the key.</param>
+		public Key(string value) => this._value = value;
 
 		/// <summary>
 		/// Operator that implicitly converts <see cref="Key"/> to its <see cref="string"/> representation.
 		/// </summary>
-		/// <param name="source">The <see cref="Key"/></param>
-		/// <returns><see cref="string"/> representation of the <see cref="Key"/></returns>
-		public static implicit operator string(Key source)
-		{
-			return source._value;
-		}
+		/// <param name="source">The <see cref="Key"/>.</param>
+		/// <returns><see cref="string"/> representation of the <see cref="Key"/>.</returns>
+		public static implicit operator string(Key source) => source._value;
 	}
 }
