@@ -7,5 +7,6 @@
 
 *.log
 *.user
+*.snk
 
 .DS_Store
