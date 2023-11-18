@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 using Serilog;
 
 namespace Rumble.Essentials;
@@ -16,30 +17,30 @@ public static class Essential
 	private static readonly IDictionary<Type, object> _cache;
 
 	/// <summary>
-	///
+	/// Resolver.
 	/// </summary>
 	private static readonly IDictionary<Type, Func<object>> _resolver;
 
-	/// <summary>
-	/// Constructor of the class.
-	/// </summary>
+	///
+	/// <inheritdoc cref="Essential" />
+	///
 	static Essential()
 	{
 		Essential._cache = new ConcurrentDictionary<Type, object>();
 		Essential._resolver = new ConcurrentDictionary<Type, Func<object>>()
 		{
-			[typeof(Settings)] = Settings.Instance,
+			[typeof(Settings)] = () => Settings.Instance.Value,
 			[typeof(ILogger)] = () =>
 			{
-				var settings = Settings.Instance();
-				const string LOGGER_SETTINGS_SECTION_NAME = "Serilog";
-				if(settings.Root().GetSection(key: LOGGER_SETTINGS_SECTION_NAME).DoesNotExist())
+				var settings = Settings.Instance.Value;
+				const string LOGGER_SECTION_NAME = "Serilog";
+				if(settings.Root().GetSection(LOGGER_SECTION_NAME).Exists() is false)
 				{
 					throw new ApplicationException
 					(
 						$"Application essentials can't be configured. " +
 						$"Settings for logger don't exist in application settings. " +
-						$"Please, ensure \"{LOGGER_SETTINGS_SECTION_NAME}\" section " +
+						$"Please, ensure \"{LOGGER_SECTION_NAME}\" section " +
 						$"exists in application settings with proper configuration parameters."
 					);
 				}
@@ -47,8 +48,9 @@ public static class Essential
 				return new LoggerConfiguration().ReadFrom.Configuration
 				(
 					configuration: settings.Root(),
-					readerOptions: new () { SectionName = LOGGER_SETTINGS_SECTION_NAME }
-				).CreateLogger();
+					readerOptions: new () { SectionName = LOGGER_SECTION_NAME }
+				)
+				.CreateLogger();
 			}
 		};
 	}
@@ -56,7 +58,7 @@ public static class Essential
 	/// <summary>
 	/// Application essentials entry.
 	/// </summary>
-	/// <typeparam name="T">Type of the application essentials entry</typeparam>
+	/// <typeparam name="T">Type of the entry.</typeparam>
 	public static T OfType<T>()
 	{
 		return (T)Essential.OfType(typeof(T));
@@ -65,25 +67,21 @@ public static class Essential
 	/// <summary>
 	/// Application essentials entry.
 	/// </summary>
-	/// <param name="type">Type of the application essentials entry</param>
+	/// <param name="type">Type of the entry.</param>
 	public static object OfType(Type type)
 	{
-		if(Essential._cache.TryGetValue(type, out var instance))
+		if (Essential._cache.TryGetValue(type, out var instance))
 		{
 			return instance;
 		}
 
-		if(Essential._resolver.TryGetValue(type, out var resolver))
+		if (Essential._resolver.TryGetValue(type, out var resolver))
 		{
 			var value = resolver.Invoke();
-			Essential._cache.Add(key: type, value);
+			Essential._cache.Add(type, value);
 			return value;
 		}
 
-		throw new ApplicationException
-		(
-			$"Instance of type {nameof(type)} can't be obtained." +
-			$"No such type is registered in the application essentials bundle."
-		);
+		throw new ApplicationException($"Instance of type {nameof(type)} can't be obtained. The type is registered in the application essentials.");
 	}
 }
