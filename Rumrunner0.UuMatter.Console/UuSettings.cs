@@ -5,49 +5,48 @@ using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace Rumble.Essentials;
+namespace Rumrunner0.UuMatter.Console;
 
 /// <summary>
-/// Wrapper of the application settings.
+/// Wrapper of the Universal Usable Settings.
 /// </summary>
-public sealed class Settings
+public sealed class UuSettings
 {
+	/// <summary>
+	/// <see cref="Lazy{T}" /> singleton instance.
+	/// </summary>
+	public static Lazy<UuSettings> Instance { get; private set; }
+
+	///
+	/// <inheritdoc cref="UuSettings" />
+	///
+	static UuSettings() => UuSettings.Instance = new (() => new (), LazyThreadSafetyMode.ExecutionAndPublication);
+
 	///
 	/// <inheritdoc cref="IConfigurationRoot" />
 	///
 	private readonly IConfigurationRoot _root;
 
-	/// <summary>
-	/// <see cref="Lazy{T}" /> singleton instance.
-	/// </summary>
-	public static Lazy<Settings> Instance { get; private set; }
-
 	///
-	/// <inheritdoc cref="Settings" />
+	/// <inheritdoc cref="UuSettings" />
 	///
-	static Settings() => Settings.Instance = new (() => new (), LazyThreadSafetyMode.ExecutionAndPublication);
-
-	///
-	/// <inheritdoc cref="Settings" />
-	///
-	private Settings() => this._root = Settings.FetchRoot();
+	private UuSettings() => this._root = UuSettings.BuildRoot();
 
 	/// <summary>
 	/// Application configuration root.
 	/// </summary>
-	/// <returns>Application configuration root</returns>
-	/// <exception cref="ApplicationException">Thrown if application configuration root has not been configured</exception>
+	/// <returns>Application configuration root.</returns>
 	public IConfigurationRoot Root() => this._root;
 
 	/// <summary>
-	/// Value of the application settings item by its <paramref name="key"/>.
+	/// Value of the UU settings item by its <paramref name="key"/>.
 	/// </summary>
 	/// <param name="key">The key.</param>
 	/// <returns>Value.</returns>
 	public string? Value(Key key) => this._root[key];
 
 	/// <summary>
-	/// Value of the application settings item by its <paramref name="key"/>.
+	/// Value of the UU settings item by its <paramref name="key"/>.
 	/// </summary>
 	/// <param name="key">The key.</param>
 	/// <typeparam name="TValue">Type of the value.</typeparam>
@@ -55,10 +54,10 @@ public sealed class Settings
 	public TValue? Value<TValue>(Key key) => (TValue?)TypeDescriptor.GetConverter(typeof(TValue))?.ConvertFrom(this._root[key] ?? string.Empty);
 
 	/// <summary>
-	/// Fetches and saves an application configuration root.
+	/// Builds an application configuration root.
 	/// </summary>
 	/// <returns>Application configuration root.</returns>
-	private static IConfigurationRoot FetchRoot()
+	private static IConfigurationRoot BuildRoot()
 	{
 		var environment = Environment
 			.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
@@ -73,7 +72,7 @@ public sealed class Settings
 	}
 
 	/// <summary>
-	/// Key of the application settings item.
+	/// Key of the UU settings item.
 	/// </summary>
 	public sealed class Key
 	{

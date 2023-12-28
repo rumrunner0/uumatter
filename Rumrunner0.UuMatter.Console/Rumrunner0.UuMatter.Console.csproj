@@ -13,12 +13,12 @@
 	<PropertyGroup>
 		<IsPackable>true</IsPackable>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageId>Rumble.Essentials</PackageId>
-		<Version>0.0.21</Version>
-		<Title>Essentials</Title>
+		<PackageId>Rumrunner0.UuMatter.Console</PackageId>
+		<Version>0.1.0</Version>
+		<Title>UuMatter.Console</Title>
 		<Authors>Roman Malyi</Authors>
 		<Copyright>Copyright (c) Roman Malyi 2023.</Copyright>
-		<RepositoryUrl>https://github.com/rumrunner0/essentials</RepositoryUrl>
+		<RepositoryUrl>https://github.com/rumrunner0/uumatter</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -27,12 +27,12 @@
 
 	<PropertyGroup>
 		<Company>Roman Malyi</Company>
-		<Product>Essentials</Product>
-		<AssemblyVersion>0.0.21</AssemblyVersion>
-		<FileVersion>0.0.21.1</FileVersion>
+		<Product>UuMatter.Console</Product>
+		<AssemblyVersion>0.1.0</AssemblyVersion>
+		<FileVersion>0.1.0.0</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>rumble_essentials.snk</AssemblyOriginatorKeyFile>
+		<AssemblyOriginatorKeyFile>../../../documents/rumrunner0_uumatter.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -70,7 +70,7 @@
 		<PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
 		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
 		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-		<PackageReference Include="Serilog.Sinks.Console" Version="5.0.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
 
