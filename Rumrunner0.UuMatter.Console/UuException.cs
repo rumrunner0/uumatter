@@ -5,7 +5,7 @@ namespace Rumrunner0.UuMatter.Console;
 /// <summary>
 /// Error that is related to the UU matter.
 /// </summary>
-public sealed class UuException : Exception
+internal sealed class UuException : Exception
 {
 	///
 	/// <inheritdoc cref="UuException" />
