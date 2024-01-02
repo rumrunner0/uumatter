@@ -39,33 +39,29 @@
 		<DefineConstants />
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\Rumrunner0.UuMatter.Console\Rumrunner0.UuMatter.Console.csproj" />
-	</ItemGroup>
-
-	<PropertyGroup>
+		<PropertyGroup>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Rumrunner0.UuMatter.Console\Rumrunner0.UuMatter.Console.csproj" />
+	</ItemGroup>
 
+	<ItemGroup>
 		<None Remove="appsettings.json" />
 		<Content Include="appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-
 		<None Remove="appsettings.Development.json" />
 		<Content Include="appsettings.Development.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<DependentUpon>appsettings.json</DependentUpon>
 		</Content>
-
 		<None Remove="appsettings.Production.json" />
 		<Content Include="appsettings.Production.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 			<DependentUpon>appsettings.json</DependentUpon>
 		</Content>
-
 	</ItemGroup>
 
 </Project>
