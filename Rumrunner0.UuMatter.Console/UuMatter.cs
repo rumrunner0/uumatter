@@ -6,7 +6,7 @@ using Serilog;
 namespace Rumrunner0.UuMatter.Console;
 
 /// <summary>
-/// Application Universal Usable Matter.
+/// Application universal usable matter.
 /// </summary>
 public static class UuMatter
 {
