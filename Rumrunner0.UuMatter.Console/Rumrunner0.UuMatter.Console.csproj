@@ -14,10 +14,10 @@
 		<IsPackable>true</IsPackable>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageId>Rumrunner0.UuMatter.Console</PackageId>
-		<Version>0.1.4</Version>
+		<Version>0.1.5</Version>
 		<Title>UuMatter.Console</Title>
 		<Authors>Roman Malyi</Authors>
-		<Copyright>Copyright (c) Roman Malyi 2023.</Copyright>
+		<Copyright>Copyright (c) Roman Malyi 2024.</Copyright>
 		<RepositoryUrl>https://github.com/rumrunner0/uumatter</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -28,8 +28,8 @@
 	<PropertyGroup>
 		<Company>Roman Malyi</Company>
 		<Product>UuMatter.Console</Product>
-		<AssemblyVersion>0.1.4</AssemblyVersion>
-		<FileVersion>0.1.4.0</FileVersion>
+		<AssemblyVersion>0.1.5</AssemblyVersion>
+		<FileVersion>0.1.5.0</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>../../documents/rumrunner0_uumatter.snk</AssemblyOriginatorKeyFile>
