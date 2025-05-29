@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8</TargetFramework>
-		<LangVersion>12</LangVersion>
+		<TargetFramework>net9</TargetFramework>
+		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Platform>AnyCPU</Platform>
@@ -13,8 +13,8 @@
 	<PropertyGroup>
 		<IsPackable>true</IsPackable>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageId>Rumrunner0.UuMatter.Console</PackageId>
-		<Version>0.1.6</Version>
+		<PackageId>Rumrunner0.UuMatter.Cli</PackageId>
+		<Version>0.2.0</Version>
 		<Title>UuMatter.Console</Title>
 		<Authors>Roman Malyi</Authors>
 		<Copyright>Copyright (c) Roman Malyi 2024.</Copyright>
@@ -28,11 +28,11 @@
 	<PropertyGroup>
 		<Company>Roman Malyi</Company>
 		<Product>UuMatter.Console</Product>
-		<AssemblyVersion>0.1.6</AssemblyVersion>
-		<FileVersion>0.1.6.0</FileVersion>
+		<AssemblyVersion>0.2.0</AssemblyVersion>
+		<FileVersion>0.2.0.0</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>../../documents/rumrunner0_uumatter.snk</AssemblyOriginatorKeyFile>
+		<AssemblyOriginatorKeyFile>../../../documents/rumrunner0_uumatter.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -59,19 +59,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
-		<PackageReference Include="Serilog" Version="3.1.1" />
-		<PackageReference Include="Serilog.Enrichers.AssemblyName" Version="1.0.9" />
-		<PackageReference Include="Serilog.Enrichers.Environment" Version="2.3.0" />
-		<PackageReference Include="Serilog.Enrichers.Process" Version="2.0.2" />
-		<PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
-		<PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
-		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
-		<PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
-		<PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
-		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.5" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.5" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.5" />
+		<PackageReference Include="Serilog" Version="4.3.0" />
+		<PackageReference Include="Serilog.Enrichers.AssemblyName" Version="2.0.0" />
+		<PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+		<PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0" />
+		<PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
 	</ItemGroup>
 
 </Project>

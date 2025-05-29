@@ -1,6 +1,6 @@
 using System;
 
-namespace Rumrunner0.UuMatter.Console;
+namespace Rumrunner0.UuMatter.Cli;
 
 /// <summary>
 /// Error that is related to the UU matter.

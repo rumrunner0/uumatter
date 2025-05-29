@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rumrunner0.UuMatter.Console", "Rumrunner0.UuMatter.Console\Rumrunner0.UuMatter.Console.csproj", "{CA059D58-7917-4585-87F6-E5AA9C546F31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rumrunner0.UuMatter.Cli", "Rumrunner0.UuMatter.Cli\Rumrunner0.UuMatter.Cli.csproj", "{CA059D58-7917-4585-87F6-E5AA9C546F31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rumrunner0.UuMatter.Console.Demo.Runnable", "Rumrunner0.UuMatter.Console.Demo.Runnable\Rumrunner0.UuMatter.Console.Demo.Runnable.csproj", "{67145831-F921-468F-8626-0638D747EE1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rumrunner0.UuMatter.Cli.Demo.Runnable", "Rumrunner0.UuMatter.Cli.Demo.Runnable\Rumrunner0.UuMatter.Cli.Demo.Runnable.csproj", "{67145831-F921-468F-8626-0638D747EE1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

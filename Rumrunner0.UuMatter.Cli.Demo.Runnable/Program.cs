@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text;
-using Rumrunner0.UuMatter.Console;
+using Rumrunner0.UuMatter.Cli;
 using Serilog;
 
 Console.InputEncoding = Encoding.UTF8;

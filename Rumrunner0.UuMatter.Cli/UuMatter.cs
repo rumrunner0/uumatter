@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 
-namespace Rumrunner0.UuMatter.Console;
+namespace Rumrunner0.UuMatter.Cli;
 
 /// <summary>
 /// Application universal usable matter.

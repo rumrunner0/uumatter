@@ -5,7 +5,7 @@ using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
-namespace Rumrunner0.UuMatter.Console;
+namespace Rumrunner0.UuMatter.Cli;
 
 /// <summary>
 /// Wrapper of the Universal Usable Settings.
@@ -66,7 +66,7 @@ public sealed class UuSettings
 		return new ConfigurationBuilder()
 			.SetBasePath(Directory.GetCurrentDirectory())
 			.AddJsonFile(path: $"appsettings.json", optional: false, reloadOnChange: true)
-			.AddJsonFile(path: $"appsettings.{environment}.json", optional: false, reloadOnChange: true)
+			.AddJsonFile(path: $"appsettings.{environment}.json", optional: true, reloadOnChange: true)
 			.AddEnvironmentVariables()
 			.Build();
 	}
