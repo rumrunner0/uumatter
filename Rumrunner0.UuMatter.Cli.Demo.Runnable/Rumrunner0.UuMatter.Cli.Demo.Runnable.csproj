@@ -22,7 +22,7 @@
 		<FileVersion>0.2.0.0</FileVersion>
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>../../../documents/rumrunner0_uumatter.snk</AssemblyOriginatorKeyFile>
+		<AssemblyOriginatorKeyFile>../../documents/rumrunner0_uumatter.snk</AssemblyOriginatorKeyFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
